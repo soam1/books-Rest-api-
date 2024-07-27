@@ -1,6 +1,7 @@
 package com.akashsoam.bootJpaExample.service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -31,4 +32,9 @@ public class BookService {
 		list.add(b);
 		return b;
 	}	
+	
+	//delete book
+	public void deleteBook(int bid) {
+		list = list.stream().filter(book -> book.getId()!=bid).collect(Collectors.toList());
+	}
 }
