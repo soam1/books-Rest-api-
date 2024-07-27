@@ -36,5 +36,10 @@ public class BookController {
 	public Book getBookById(@PathVariable int id) {
 		return this.bookService.getBookById(id);
 	}
+	
+	@PostMapping("/books")
+	public Book addBook(@RequestBody Book book) {
+		return this.bookService.addBook(book);
+	}
 
 }
