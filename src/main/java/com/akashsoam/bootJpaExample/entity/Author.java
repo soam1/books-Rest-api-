@@ -1,5 +1,8 @@
 package com.akashsoam.bootJpaExample.entity;
 
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @jakarta.persistence.Entity
 @jakarta.persistence.Table(name = "authors")
 public class Author {
@@ -11,15 +14,28 @@ public class Author {
 	private String name;
     private String language;
     
-    public Author() {
+    @OneToOne(mappedBy = "author")
+    @JsonBackReference
+    private Book book;
+    
+    public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Author() {
     	super();
     }
     
-	public Author(int id, String name, String language) {
+	public Author(int id, String name, String language, Book book) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.language = language;
+		this.book = book;
 	}
 	
 	//getters and setters
@@ -49,6 +65,6 @@ public class Author {
 	
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", language=" + language + "]";
+		return "Author [id=" + id + ", name=" + name + ", language=" + language + ", book=" + book +"]";
 	}
 }

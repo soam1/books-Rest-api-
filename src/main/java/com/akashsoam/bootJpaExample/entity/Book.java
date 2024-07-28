@@ -4,6 +4,7 @@ package com.akashsoam.bootJpaExample.entity;
 //import jakarta.annotation.*;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -15,7 +16,9 @@ public class Book {
 	@Column(name = "book_id")
 	private int id;
 	private String name;
-	@OneToOne(cascade= CascadeType.ALL)
+	
+	@OneToOne(cascade	= CascadeType.ALL)
+	@JsonManagedReference
 	private Author author;
 
 	public Book() {
@@ -58,6 +61,6 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", author=" + author.toString() + "]";
+		return "Book [id=" + id + ", name=" + name + ", author=" + author.getName() + "]";
 	}
 }
