@@ -15,13 +15,14 @@ public class Book {
 	@Column(name = "book_id")
 	private int id;
 	private String name;
-	private String author;
+	@OneToOne(cascade= CascadeType.ALL)
+	private Author author;
 
 	public Book() {
 		super();
 	}
 
-	public Book(int id, String name, String author) {
+	public Book(int id, String name, Author author) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,16 +48,16 @@ public class Book {
 	}
 
 //	@XmlElement
-	public String getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", author=" + author + "]";
+		return "Book [id=" + id + ", name=" + name + ", author=" + author.toString() + "]";
 	}
 }
