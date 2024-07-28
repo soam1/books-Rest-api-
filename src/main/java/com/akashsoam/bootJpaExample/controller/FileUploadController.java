@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.akashsoam.bootJpaExample.helper.FileUploadHelper;
 
 @RestController
@@ -33,7 +34,8 @@ public class FileUploadController {
 		// upload the file
 		try {
 			if (fileUploadHelper.uploadFile(file)) {
-				return ResponseEntity.ok("File is uploaded");
+//				return ResponseEntity.ok("File is uploaded at location: " + fileUploadHelper.UPLOAD_DIR + "/" + file.getOriginalFilename());
+				return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/").path(file.getOriginalFilename()).toUriString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
